@@ -1,6 +1,6 @@
 import React from "react";
 import Nature from "./../../assets/Nature.jpg";
-import street from "./../../assets/street.jpeg";
+import Street from "./../../assets/street.jpg";
 import "./styles.scss";
 
 const Directory = (props) => {
@@ -12,17 +12,18 @@ const Directory = (props) => {
           style={{
             backgroundImage: `url(${Nature})`,
           }}
-        ></div>{" "}
-        <a> Shop Nature </a>{" "}
+        >
+          <a>Nature</a>
+        </div>
         <div
+          className="item"
           style={{
-            backgroundImage: `url(${street})`,
+            backgroundImage: `url(${Street})`,
           }}
         >
-          {" "}
-        </div>{" "}
-        <a> Shop Street </a>{" "}
-      </div>{" "}
+          <a>Street</a>
+        </div>
+      </div>
     </div>
   );
 };
