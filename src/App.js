@@ -6,6 +6,7 @@ import HomepageLayout from "./layouts/HomepageLayout";
 //pages
 import Homepage from "./pages/Homepage";
 import Registration from "./pages/Registration";
+import Login from "./pages/Login";
 import "./default.scss";
 
 function App() {
@@ -26,6 +27,14 @@ function App() {
           render={() => (
             <MainLayout>
               <Registration />
+            </MainLayout>
+          )}
+        />
+        <Route
+          path="/login"
+          render={() => (
+            <MainLayout>
+              <Login />
             </MainLayout>
           )}
         />
