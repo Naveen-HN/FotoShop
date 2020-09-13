@@ -3,6 +3,8 @@ import "./styles.scss";
 import Button from "./../forms/Button";
 import { signInWithGoogle, auth } from "./../../firebase/utils";
 import FormInput from "./../forms/FormInput";
+import AuthWrapper from "./../AuthWrapper";
+import { Link } from "react-router-dom";
 
 const initialState = {
   email: "",
@@ -12,7 +14,9 @@ const initialState = {
 class SignIn extends Component {
   constructor(props) {
     super(props);
-    this.state = { ...initialState };
+    this.state = {
+      ...initialState,
+    };
   }
 
   handleSubmit = async (e) => {
@@ -20,7 +24,9 @@ class SignIn extends Component {
     const { email, password } = this.state;
     try {
       await auth.signInWithEmailAndPassword(email, password);
-      this.setState({ ...initialState });
+      this.setState({
+        ...initialState,
+      });
     } catch (err) {}
   };
 
@@ -33,38 +39,42 @@ class SignIn extends Component {
 
   render() {
     const { email, password } = this.state;
+    const configAuthWrapper = {
+      headline: "Login",
+    };
     return (
-      <div className="signin">
-        <div className="wrap">
-          <h2> LogIn </h2>{" "}
-          <div className="formWrap">
-            <form onSubmit={this.handleSubmit}>
-              <FormInput
-                type="email"
-                name="email"
-                value={email}
-                placeholder="Email"
-                handleChange={this.handleChange}
-              />
-              <FormInput
-                type="password"
-                name="password"
-                value={password}
-                placeholder="Password"
-                handleChange={this.handleChange}
-              />
-              <Button type="submit">LogIn</Button>
-              <div className="socialSignin">
-                <div className="row">
-                  <Button onClick={signInWithGoogle}>
-                    Sign in with Google{" "}
-                  </Button>{" "}
-                </div>{" "}
+      <AuthWrapper {...configAuthWrapper}>
+        <div className="formWrap">
+          <form onSubmit={this.handleSubmit}>
+            <FormInput
+              type="email"
+              name="email"
+              value={email}
+              placeholder="Email"
+              handleChange={this.handleChange}
+            />{" "}
+            <FormInput
+              type="password"
+              name="password"
+              value={password}
+              placeholder="Password"
+              handleChange={this.handleChange}
+            />{" "}
+            <Button type="submit"> LogIn </Button>{" "}
+            <div className="socialSignin">
+              <div className="row">
+                <Button onClick={signInWithGoogle}>
+                  {" "}
+                  Sign in with Google{" "}
+                </Button>{" "}
               </div>{" "}
-            </form>{" "}
-          </div>{" "}
+            </div>{" "}
+            <div className="links">
+              <Link to="/recovery">Reset Password</Link>
+            </div>
+          </form>{" "}
         </div>{" "}
-      </div>
+      </AuthWrapper>
     );
   }
 }
