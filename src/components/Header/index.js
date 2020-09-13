@@ -1,6 +1,6 @@
 import React from "react";
 import "./styles.scss";
-
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { auth } from "./../../firebase/utils";
 import Logo from "./../../assets/logo.png";
@@ -16,14 +16,14 @@ const Header = (props) => {
           </Link>{" "}
         </div>{" "}
         <div className="callToActions">
+          {" "}
           {currentUser && (
             <ul>
               <li>
-                <span onClick={() => auth.signOut()}>Log out</span>
-              </li>
+                <span onClick={() => auth.signOut()}> Log out </span>{" "}
+              </li>{" "}
             </ul>
           )}
-
           {!currentUser && (
             <ul>
               <li>
@@ -33,7 +33,7 @@ const Header = (props) => {
                 <Link to="/login"> Login </Link>{" "}
               </li>{" "}
             </ul>
-          )}
+          )}{" "}
         </div>{" "}
       </div>{" "}
     </header>
@@ -44,4 +44,8 @@ Header.defaultProps = {
   currentUser: null,
 };
 
-export default Header;
+const mapStateToProps = ({ user }) => ({
+  currentUser: user.currentUser,
+});
+
+export default connect(mapStateToProps, null)(Header);
