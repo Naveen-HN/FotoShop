@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { withRouter } from "react-router-dom";
 import FormInput from "./../forms/FormInput";
 import Button from "./../forms/Button";
 import "./styles.scss";
@@ -35,6 +36,7 @@ const Signup = (props) => {
         displayName,
       });
       reset();
+      props.history.push("/");
     } catch (err) {
       // console.log(err);
     }
@@ -84,11 +86,11 @@ const Signup = (props) => {
             placeholder="Confirm Password"
             handleChange={(e) => setConfirmPassword(e.target.value)}
           />{" "}
-          <Button type="submit">Register </Button>{" "}
+          <Button type="submit"> Register </Button>{" "}
         </form>{" "}
       </div>{" "}
     </AuthWrapper>
   );
 };
 
-export default Signup;
+export default withRouter(Signup);

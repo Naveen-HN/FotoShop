@@ -4,7 +4,7 @@ import Button from "./../forms/Button";
 import { signInWithGoogle, auth } from "./../../firebase/utils";
 import FormInput from "./../forms/FormInput";
 import AuthWrapper from "./../AuthWrapper";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
 const SignIn = (props) => {
   const [email, setEmail] = useState("");
@@ -20,6 +20,7 @@ const SignIn = (props) => {
     try {
       await auth.signInWithEmailAndPassword(email, password);
       resetForm();
+      props.history.push("/");
     } catch (err) {}
   };
 
@@ -59,4 +60,4 @@ const SignIn = (props) => {
   );
 };
 
-export default SignIn;
+export default withRouter(SignIn);
